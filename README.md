@@ -38,3 +38,37 @@
 ## click
 
 - 리액트에서 click 이벤트를 사용할때는 click 을 사용할 요소 안에 onClick={함수} 이런 형식으로 사용한다
+
+## state
+
+- 컴포넌트에서 어떤 것을 기억해야 할 때 state를 사용한다
+
+- Constuctor(생성자)에서 this.state = {state 이름: state 값} 이런 형식으로 사용한다
+
+- setState({state 이름: state 값}) 이런 형식으로 변경
+
+**_ 리액트에서는 데이터가 변할 때 화면을 다시 렌더링 해주기 위해서 React State를 사용해야 한다 _**
+
+- state가 변경되면 컴포넌트는 리렌더링되고 state는 컴포넌트 안에서 관리됩니다
+
+## super() 란?
+
+- super() 를 써야지만 this를 사용할 수 있음
+
+- super() 는 부모 클래스의 생성자를 호출하는 함수
+
+- 생성자 내부에서도 this.props 를 정상적으로 사용할 수 있도록 보장하기 위해서 super에 props를 인자값으로 넣어준다
+
+### State 와 Props
+
+- 자식 컴포넌트에서 부모 컴포넌트에 있는 값이 필요할 때 props를 사용
+
+- State는 해당 컴포넌트 내부에서 데이터 처리될때 사용
+
+- State가 변하면 re-render 된다
+
+## state 부모 요소로 전달
+
+- 부모 요소에서 자식 요소로 state를 전달할 때는 <자식 요소 state 이름={this.state.state 이름} /> 이런 형식으로 전달한다
+
+- Array.prototype.fill() 메서드는 배열의 시작 인덱스부터 끝 인덱스까지 정적인 값 하나로 채운다
