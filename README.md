@@ -35,6 +35,8 @@
 
 - 사용방법은 <컴포넌트 속성이름="값" /> 이런 형식으로 사용하고 자식 컴포넌트에서는 this.props.컴포넌트 속성이름 이런 형식으로 사용한다
 
+- 함수도 props로 전달할 수 있다
+
 ## click
 
 - 리액트에서 click 이벤트를 사용할때는 click 을 사용할 요소 안에 onClick={함수} 이런 형식으로 사용한다
@@ -72,3 +74,23 @@
 - 부모 요소에서 자식 요소로 state를 전달할 때는 <자식 요소 state 이름={this.state.state 이름} /> 이런 형식으로 전달한다
 
 - Array.prototype.fill() 메서드는 배열의 시작 인덱스부터 끝 인덱스까지 정적인 값 하나로 채운다
+
+- Array.prototype.slice() 메서드는 배열의 시작 인덱스부터 끝 인덱스까지 얕게 복사한 새로운 배열 객체를 반환한다
+
+## 불변성
+
+- 데이터 타입에는 원시타입과 참조타입이 있다
+
+- 원시타입은 String, Number, Boolean, Null, Undefined, Symbol 이 있고 참조타입은 Object, Array, Function 이 있다
+
+- 원시타입은 값이 변경되면 새로운 값을 할당하고 참조타입은 값이 변경되면 원래 있던 값이 변경된다
+
+- 객체나 배열의 값이 변할 때 원본 데이터가 변경이 되기 때문에 다른 객체에서 오류가 발생해서 데이터를 불변성을 유지해야 한다
+
+- 이 불변성을 유지하기 위해서 spread operator, map, filter, slice, reduce 등을 사용
+
+- 원본 데이터를 변경할때는 splice, push, pop, shift, unshift 등을 사용
+
+# React Hooks
+
+- class 없이 state를 사용할 수 있는 새로운 기능
