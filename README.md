@@ -94,3 +94,31 @@
 # React Hooks
 
 - class 없이 state를 사용할 수 있는 새로운 기능
+
+### 클래스 컴포넌트 vs 함수형 컴포넌트
+
+- 클래스 컴포넌트: 더 많은 기능, 더 긴 코드, 더 복잡한 코드, 더딘 성능
+
+- 함수형 컴포넌트: 더 적은 기능, 짧은 코드, 심플한 코드, 더 빠른 성능
+
+- 더 적은 기능이란 state와 lifecycle 기능이 없다는 뜻이다
+
+- 하지만, React Hooks가 도입되면서 함수형 컴포넌트에서도 state와 lifecycle 기능을 사용할 수 있게 되었음
+
+### HOC (Higher-Order Component)
+
+- HOC 컴포넌트를 Custom React Hooks 로 대채해서 많은 Wrapper 컴포넌트를 줄일 수 있다
+
+- 화면에서 재사용 가능한 로직을 분리해 컴포넌트로 만들고 재사용 불가능한 UI 와 같은 다른 부분들은 parameter로 받아서 처리하는 방법
+
+- 이렇게 해도 warpper 컴포넌트가 많아지면 코드가 복잡해지고 가독성이 떨어지는 단점이 있다
+
+- 이런 단점을 해결하기 위해서 Custom React Hooks를 사용
+
+### useState, useEffect
+
+- 클래스 컴포넌트에서 state를 사용할때는 this.state = { name: "" } 이런식으로 사용하고 값을 바꿀때는 this.setState({ name: "값" }) 이런식으로 사용하는데
+  React Hooks에서는 const [Name, setName] = useState("") 이런식으로 사용하고 값을 바꿀때는 setName("값") 이런식으로 사용한다
+
+- 클래스형 컴포넌트에서는 값을 처음 불러올때, 값이 변경될때, 값이 사라질때 componentDidMount, componentDidUpdate, componentWillUnmount 를 사용했는데
+  React Hooks에서는 useEffect를 사용해서 마지막에 [바뀌는 값] 이런식으로 사용한다
