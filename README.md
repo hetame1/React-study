@@ -118,7 +118,27 @@
 ### useState, useEffect
 
 - 클래스 컴포넌트에서 state를 사용할때는 this.state = { name: "" } 이런식으로 사용하고 값을 바꿀때는 this.setState({ name: "값" }) 이런식으로 사용하는데
-  React Hooks에서는 const [Name, setName] = useState("") 이런식으로 사용하고 값을 바꿀때는 setName("값") 이런식으로 사용한다
+  React Hooks에서는 const [Name, setName] = useState("기본값") 이런식으로 사용하고 값을 바꿀때는 setName("값") 이런식으로 사용한다
 
 - 클래스형 컴포넌트에서는 값을 처음 불러올때, 값이 변경될때, 값이 사라질때 componentDidMount, componentDidUpdate, componentWillUnmount 를 사용했는데
   React Hooks에서는 useEffect를 사용해서 마지막에 [바뀌는 값] 이런식으로 사용한다
+
+## 전개 연산자
+
+- 특정 객체 또는 배열의 값을 다른객체, 배열로 복제하거나 옮길 때 사용
+
+- ...을 사용해서 전개 연산자를 사용
+
+- 기존배열을 수정하지 않고 새로운 배열을 만들어서 사용할 수 있음
+
+### map() 메서드
+
+- map() 메서드는 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환
+
+## JSX Key 속성
+
+- 리액트에서 요소의 리시트를 나열할 때는 key 속성을 사용해야 한다
+
+- key 속성은 고유한 값을 사용해야 한다
+
+- key 속성은 리액트가 어떤 항목을 변경, 추가, 삭제할지 식별하는 것을 돕는다
