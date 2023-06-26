@@ -23,3 +23,13 @@
 - 스크롤시 NavBar 색상 변경 (window.scrollY)
 
 - styled-components에 props를 전달하여 props에 따라 스타일 변경
+
+## 6. 영화 데이터 가져오기
+
+- 비동기를 통해 async await을 이용해 데이터를 가져옴
+
+- useEffect를 이용해 컴포넌트가 마운트 되었을 때 데이터를 가져옴
+
+- 미리 만들어놓은 axios, request를 이용해 데이터를 가져옴
+
+- 그 가져온 데이터에서 랜덤으로 id 값을 가져오고 그 id값을 이용해 더 상세한 데이터를 가져옴
