@@ -52,3 +52,15 @@
   - content-box : 테두리 안쪽에 배경을 채움
   - padding-box : 테두리와 안쪽 여백 안쪽에 배경을 채움
   - border-box : 테두리 안쪽에 배경을 채움 (default)
+
+## 9. 모달창 만들기
+
+- 영화를 클릭했을 때 영화 정보와 modalOpen 을 true로 바꾸고
+
+- true 일때 모달창을 만드는데 만들때 영화 정보를 props로 전달
+
+### animation CSS
+
+- 애니메이션을 사용하면 한 스타일에서 다른 스타일로 부드럽게 전환할 수 있음
+
+- @keyframes 를 사용하여 애니메이션을 만들고 @keyframes를 사용하여 애니메이션을 사용할 요소를 지정
