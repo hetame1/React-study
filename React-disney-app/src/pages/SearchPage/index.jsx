@@ -13,7 +13,7 @@ const SearchPage = () => {
     return new URLSearchParams(useLocation().search);
   }
   
-  // 검색어에서 q=값만 가져오기
+  // 검색어에서 query=값만 가져오기
   let query = useQuery();
   const searchTerm = query.get("query")
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -29,7 +29,6 @@ const SearchPage = () => {
     try {
       const res = await axios.get(`/search/multi?include_adult=false&query=${debouncedSearchTerm}`)
       setSearchResult(res.data.results)
-      console.log(res);
     }
     catch(error) {
       console.log(error);

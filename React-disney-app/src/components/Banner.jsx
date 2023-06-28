@@ -17,7 +17,7 @@ const Banner = () => {
     // 현재 상영중인 영화 목록 가져오기
     const res = await axios.get(request.fetchNowPlaying)
     // 랜덤으로 영화 아이디 하나 고르기
-    const movieId = res.data.results[Math.floor(Math.random() * res.data.results.length)].id
+    const movieId = res?.data.results[Math.floor(Math.random() * res.data.results.length)].id
     
     // 고른 영화 아이디로 영화 정보 가져오기
     const { data: movieDetail } = await axios.get(`movie/${movieId}`, {
