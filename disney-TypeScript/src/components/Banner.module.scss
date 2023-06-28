@@ -1,0 +1,45 @@
+.banner {
+  height: 448px;
+
+  .banner__contents {
+    margin-left: 40px;
+    padding-top: 120px;
+    height: 190px;
+
+    .banner__title {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .banner__buttons {
+      display: flex;
+
+      .banner__button {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.4rem 1rem;
+        margin-right: 1rem;
+
+        &:hover {
+          color: #000;
+          background-color: rgba(170, 170, 170, 0.9);
+          transition: all 0.2s;
+        }
+      }
+    }
+
+    .banner__description {
+      width: 45rem;
+      margin-top: 1.5rem;
+      font-weight: 500;
+      font-size: 1rem;
+      max-width: 400px;
+      height: 80px;
+    }
+  }
+}
