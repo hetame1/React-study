@@ -27,7 +27,7 @@ const Banner = () => {
   }, [])
 
   const fetchData = async () => {
-    const res = await axios.get(request.fetchTrending);
+    const res = await axios.get(request.fetchNowPlaying);
     const movieId = res?.data.results[Math.floor(Math.random() * res?.data.results.length)].id;
 
     const { data: movieDetail } = await axios.get(`movie/${movieId}`, {
@@ -46,7 +46,7 @@ const Banner = () => {
       style={{
         backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'top center'
       }}
     >
       <div className={styles.banner__contents}>
@@ -63,7 +63,7 @@ const Banner = () => {
         <h1 className={styles.banner__description}>{truncate(movie?.overview, 100)}</h1>
       </div>
 
-      <div className="banner--fadeBottom" />
+      <div className={styles.banner__fadeBottom} />
 
     </header>
   )
