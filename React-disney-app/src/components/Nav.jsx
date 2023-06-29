@@ -1,15 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 
 const Nav = () => {
+  const initialUserData = localStorage.getItem("userData") ? 
+  JSON.parse(localStorage.getItem("userData")) : {};
+
   const [show, setShow] = useState(false);
   const { pathname } = useLocation();
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(initialUserData)
+
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if(user) {
+        if(pathname === "/") {
+          navigate("/main");
+        }
+      } else {
+        navigate("/");
+      }
+    })
+  }, [auth, navigate, pathname])
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -35,12 +52,24 @@ const Nav = () => {
 
   const handleAuth = () => {
     signInWithPopup(auth, provider)
-    .then((result) =>{})
+    .then((result) =>{
+      setUserData(result.user);
+      localStorage.setItem("userData", JSON.stringify(result.user));
+    })
+    .catch((error) => {console.log(error);})
+  }
+
+  const handleSignOut = () => {
+    signOut(auth)
+    .then(() => {
+      setUserData({});
+      navigate("/");
+    })
     .catch((error) => {console.log(error);})
   }
 
   return (
-    <NavWapper show={show}>
+    <NavWapper show={show.toString()}>
       <Logo>
         <img
           alt="Disney+"
@@ -51,13 +80,21 @@ const Nav = () => {
 
       {pathname === "/" ? 
       (<Login onClick={handleAuth}>Login</Login>) : 
+      <>
       <Input 
         value={searchValue}
         onChange={handleChange}
         className='nav__input' 
         type='text' 
         placeholder='입력 해주세요' 
-        />
+      />
+      <SignOut>
+        <UserImg src={userData.photoURL} alt={userData.displayName} />
+        <DropDown>
+          <span onClick={handleSignOut}>Sign Out</span>
+        </DropDown>
+      </SignOut>
+      </>
       }
     </NavWapper>
   )
@@ -65,13 +102,51 @@ const Nav = () => {
 
 export default Nav
 
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0px;
+  background-color: rgba(19, 19, 19, 0.8);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 100px;
+  opacity: 0;
+`
+
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
+`
+
+const UserImg = styled.img`
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+`
+
 const NavWapper = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 70px;
-  background-color: ${props => props.show ? "#090b13" : "transparent"};
+  background-color: ${props => props?.show ? "#090b13" : "transparent"};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,6 +162,7 @@ const Logo = styled.a`
   max-height: 70px;
   font-size: 0;
   display: inline-block;
+  cursor: pointer;
 
   img {
     display: block;
@@ -100,6 +176,7 @@ const Login = styled.a`
   letter-spacing: 1.5px;
   border: 1px solid #f9f9f9;
   transition: all 0.2s ease 0s;
+  cursor: pointer;
 
   &:hover {
     background-color: #f9f9f9;

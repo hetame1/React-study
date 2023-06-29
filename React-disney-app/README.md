@@ -143,3 +143,17 @@
 - popup을 이용해 로그인 창을 띄움
 
 ## 16. 로그인 페이지 구성
+
+## 17. 로그인 상태 유지
+
+- localStorage를 이용해 로그인 상태를 유지
+
+### localStorage
+
+- localStorage는 브라우저에 데이터를 저장하는 방법
+
+- localStorage.setItem('key', 'value') : key와 value를 저장
+
+- localStorage.getItem('key') : key에 해당하는 value를 가져옴
+
+- 객체나 배열을 저장할때는 JSON.stringify()를 이용해 문자열로 변환 후 저장
