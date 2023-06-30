@@ -21,7 +21,8 @@ function App() : JSX.Element {
     <div className='app'>
       <Routes>
         <Route path='/' element={<Layout />} >
-          <Route index element={<MainPage />} />
+          <Route index element={<LoginPage />} />
+          <Route path='main' element={<MainPage />} />
           <Route path='search' element={<SearchPage />} />
         </Route>
       </Routes>

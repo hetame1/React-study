@@ -11,7 +11,7 @@ const Nav = () => {
   const { pathname } = useLocation();
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(initialUserData)
+  const [userData, setUserData] = useState<User | null>(initialUserData)
 
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
@@ -56,7 +56,7 @@ const Nav = () => {
       setUserData(result.user);
       localStorage.setItem("userData", JSON.stringify(result.user));
     })
-    .catch((error) => {console.log(error);})
+    .catch((error) => {console.log(error);})  
   }
 
   const handleSignOut = () => {

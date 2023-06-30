@@ -1,23 +1,39 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components'
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components'
+import { auth, provider } from '../firebase';
+import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 
-type user = {
+type User = {
   displayName: string;
   email: string;
   photoURL: string;
 }
 
 const Nav = () => {
+  const userDataString = localStorage.getItem("userData");
+  const initialUserData: User | null = userDataString
+  ? JSON.parse(userDataString) as any
+  : null;
+
   const [show, setShow] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("")
-  // const [userData, setUserData] = useState<user>({} as user)
+  const { pathname } = useLocation();
+  const [userData, setUserData] = useState<User | null>(initialUserData as User)
 
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if(user) {
+        if(pathname === "/") {
+          navigate("/main");
+        }
+      } else {
+        navigate("/");
+      }
+    })
+  }, [auth, navigate, pathname])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -36,16 +52,27 @@ const Nav = () => {
 
   const handleSearch = (e : React.ChangeEvent<HTMLInputElement>) : void => {
     setSearchValue(e.target.value)
-    Navigate(`/search?query=${searchValue}`)
+    navigate(`/search?query=${searchValue}`)
   }
 
   const handleAuth = () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log(result.user)
-      }).catch((error) => {
+      .then((result: any) => {
+        setUserData(result.user);
+        localStorage.setItem("userData", JSON.stringify(result.user));
+      })
+      .catch((error: any) => {
+        console.log(error)
+      })
+  }
 
-      });
+  const handleSignOut = () => {
+    signOut(auth)
+    .then(() => {
+      setUserData(null);
+      navigate("/");
+    })
+    .catch((error) => {console.log(error);})
   }
 
   return (
@@ -57,29 +84,68 @@ const Nav = () => {
           onClick={() => window.location.href = '/'}
         />
       </Logo>
-      <SearchBar>
-        <input
-          value={searchValue}
-          onChange={handleSearch}
-          type='text' 
-          placeholder='Search'
-        />
-      </SearchBar>
-
-      <Login
-        onClick={handleAuth} 
-      >login
-      </Login>
-      
+      {pathname === '/' ? 
+      (<Login onClick={handleAuth}>Login</Login>) :
+      <>
+        <SearchBar>
+          <input
+            value={searchValue}
+            onChange={handleSearch}
+            type='text' 
+            placeholder='Search'
+          />
+        </SearchBar>
+        <SignOut>
+          <UserImg src={userData?.photoURL} alt={userData?.displayName} />
+          <DropDown>
+            <span onClick={handleSignOut}>Sign Out</span>
+          </DropDown>
+        </SignOut>
+      </>
+      }   
+        
     </NavWrapper>
   )
 }
 
 export default Nav
 
-const Login = styled.a`
-  background-color: rgba(0, 0, 0, 0.6);
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0px;
+  background-color: rgba(19, 19, 19, 0.8);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 100px;
+  opacity: 0;
+`
 
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
+`
+
+const UserImg = styled.img`
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
 `
 
 const  SearchBar = styled.div`
@@ -121,5 +187,21 @@ const Logo = styled.a`
   img {
     display: block;
     width: 100%;
+  }
+`
+
+const Login = styled.a`
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+    color: gray;
+    border-color: transparent;
   }
 `
