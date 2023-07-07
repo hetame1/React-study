@@ -11,7 +11,7 @@ const Nav = () => {
   const { pathname } = useLocation();
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
-  const [userData, setUserData] = useState<User | null>(initialUserData)
+  const [userData, setUserData] = useState(initialUserData)
 
   const auth = getAuth();
   const provider = new GoogleAuthProvider();

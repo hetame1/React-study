@@ -33,7 +33,7 @@ const Nav = () => {
         navigate("/");
       }
     })
-  }, [auth, navigate, pathname])
+  }, [navigate, pathname])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)

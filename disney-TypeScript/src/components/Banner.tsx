@@ -30,6 +30,8 @@ const Banner = () => {
 
   const fetchData = async () => {
     const res = await axios.get(request.fetchNowPlaying);
+    console.log(res.data);
+    
     const movieId = res?.data.results[Math.floor(Math.random() * res?.data.results.length)].id;
 
     const { data: movieDetail } = await axios.get(`movie/${movieId}`, {

@@ -39,6 +39,8 @@ const SearchPage = () => {
 
   const fetchSearch = async (debouncedSearchTerm : string | null) => {
     const res = await axios.get(`/search/multi?include_adult=false&query=${debouncedSearchTerm}`)
+    console.log(res);
+    
     setSearchMovie(res.data.results)
     console.log(res.data.results)
   }
