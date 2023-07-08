@@ -24,7 +24,7 @@
 
 - nest g controller [컨트롤러명] 명령어로 컨트롤러를 생성할 수 있습니다
 
-### Handler 
+### Handler
 
 - 핸들러는 @Get, @Post, @Delete 등과 같은 데코레이터로 장식 된 컨트롤러 클래스 내의 단순한 메서드입니다
 
@@ -62,3 +62,85 @@ constructor(private boardsService: BoardsService) {}
 - 프로바이더의 주요 아이디어는 종속성으로 **주입**할 수 있다는 것입니다
 
 - 객체는 서로 다양한 관계를 만들 수 있으며 객체의 인스턴스를 연결하는 기능은 대부분 Nest 런타임 시스템에 위임될 수 있습니다
+
+## 생성
+
+- @Body() body 를 이용해서 body를 받아올 수 있습니다
+
+## DTO (Data Transfer Object)
+
+- 데이터 전송 객체는 계층 간 데이터 교환을 위한 객체입니다
+
+- DB에서 데이터를 얻어 서비스나, 컨트롤러 등으로 보낼 때 사용하는 객체를 말한다
+
+- DTO는 데이터가 네트워크를 통해 전송되는 방법을 정의하는 객체
+
+- 인터페이스나 클래스를 이용해서 정의 할 수 있음 (클래스를 이용하는 것을 권장)
+
+### 쓰는 이유
+
+- 데이터 유효성을 체크하는데 효율적
+
+- 더 안정적인 코드를 만들어 줌
+
+## Pipe
+
+- @Injectable() 데코레이터로 클래스를 데코레이션하여 정의됩니다
+
+- data transformation, data validation 등을 위해 사용됩니다
+
+- 컨트롤러 경로 처리기에 의해 처리되는 인수에 대해 작동합니다
+
+- 메소드가 호출되기 직전에 파이프에 삽입하고 파이프는 메소드로 향하는 인수를 수신하고 이에 대해 작동합니다
+
+### data transformation
+
+- 파이프는 메소드로 향하는 인수를 수신하고 이에 대해 작동합니다
+
+- 입력 데이터를 원하는 형식으로 변환 (예: 문자열을 숫자로 변환)
+
+### data validation
+
+- 파이프는 메소드로 향하는 인수를 수신하고 이에 대해 작동합니다
+
+- 입력 데이터를 유효성 검사 (예: 데이터 유형 확인)
+
+https://github.com/typestack/class-validator#manual-validation
+
+### 사용하는 법
+
+- Handler-level Pipes, Parameter-level Pipes, Global Pipes
+
+**Handler-level Pipes**
+
+- 컨트롤러 메소드에 @UsePipes() 데코레이터를 사용하여 파이프를 적용할 수 있습니다
+
+- 핸들러 레벨에서 사용해 모든 파라미터에 적용
+
+**Parameter-level Pipes**
+
+- 특정한 파라미터에게만 적용이 되는 파이프
+
+**Global Pipes**
+
+- 애플리케이션 전체에 적용되는 파이프
+
+- 클라이언트에서 들어오는 모든 요청에 적용이 됨
+
+### Built-in Pipes
+
+- Nest는 유용한 내장 파이프를 제공합니다
+
+- ValidationPipe, ParseIntPipe, ParseBoolPipe, ParseArrayPipe, ParseUUIDPipe, DefaultValuePipe
+
+### Custom Pipes
+
+- PipeTransform 이란 인터페이스를 새롭게 만들 커스텀 파이프에 구현해야 합니다
+
+- 파이프는 transform() 메소드를 구현해야 합니다
+
+- transform() 메소드는 두 개의 인수를 받습니다
+
+- 첫번째 파라미터는 처리가 된 인자의 값(value) 이며
+
+- 두번째 파라미터는 메소드의 메타데이터(metadata) 입니다
