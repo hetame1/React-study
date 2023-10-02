@@ -1,7 +1,7 @@
 import { app } from "@/firebase"
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const SignupForm = () => {
@@ -9,6 +9,7 @@ const SignupForm = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [passwordConfirm, setPasswordConfirm] = useState<string>('')
+  const navigate = useNavigate()
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -17,6 +18,7 @@ const SignupForm = () => {
       await createUserWithEmailAndPassword(auth, email, password)
 
       toast.success('회원가입이 완료되었습니다.')
+      navigate('/')
     } catch (error: any) {
       console.log(error);
       toast.error(error?.code)
