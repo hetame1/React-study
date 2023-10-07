@@ -1,63 +1,115 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import AuthContext from "@/context/AuthContext";
+import { db } from "@/firebase";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface PostListProps {
-  hasNavigation?: boolean
+  hasNavigation?: boolean;
 }
 
-type TabType = 'all' | 'my'
+type TabType = "all" | "my";
+
+export interface PostProps {
+  id?: string;
+  title: string;
+  summary: string;
+  content: string;
+  createdAt: string;
+  email: string;
+  updatedAt?: string;
+  uid: string;
+}
 
 const PostList = ({ hasNavigation = true }: PostListProps) => {
-  const [activeTab, setActiveTab] = useState<TabType>('all')
+  const [activeTab, setActiveTab] = useState<TabType>("all");
+  const [posts, setPosts] = useState<PostProps[]>([]);
+  const { user } = useContext(AuthContext);
+
+  const getPost = async () => {
+    const datas = await getDocs(collection(db, "posts"));
+
+    setPosts([]);
+    datas.forEach((doc) => {
+      const dataObj = { ...doc.data(), id: doc.id };
+      setPosts((prev) => [...prev, dataObj as PostProps]);
+    });
+  };
+
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    const confirm = window.confirm("정말 삭제하시겠습니까?");
+    if (confirm && id) {
+      await deleteDoc(doc(db, "posts", id));
+
+      toast.success("삭제되었습니다.");
+      getPost();
+    }
+  };
 
   return (
     <>
-      {
-        hasNavigation && (
+      {hasNavigation && (
         <div className="post__navigation">
-          <div 
+          <div
             role="presentation"
-            onClick={() => setActiveTab('all')}
-            className={activeTab === 'all' ? "post__navigation--active" : ""}
+            onClick={() => setActiveTab("all")}
+            className={activeTab === "all" ? "post__navigation--active" : ""}
           >
             전체
           </div>
-          <div 
-            role="presentation" 
-            onClick={() => setActiveTab('my')}
-            className={activeTab === 'my' ? "post__navigation--active" : ""}
+          <div
+            role="presentation"
+            onClick={() => setActiveTab("my")}
+            className={activeTab === "my" ? "post__navigation--active" : ""}
           >
             나의 글
           </div>
         </div>
-        )
-      }
-      <div className="post__list">
-        {[...Array(10)].map((_e, index) => {
-          return (
-            <div key={index} className="post__box">
-              <Link to={`/posts/${index}`}> 
+      )}
 
+      <div className="post__list">
+        {posts?.length > 0 ? (
+          posts?.map((post) => (
+            <div key={post?.id} className="post__box">
+              <Link to={`/posts/${post?.id}`}>
                 <div className="post__profile-box">
                   <div className="post__profile" />
-                  <div className="post__author-name">테스트</div>
-                  <div className="post__date">2021-10-10</div>
+                  <div className="post__author-name">{post?.email}</div>
+                  <div className="post__date">{post?.createdAt}</div>
                 </div>
 
-                <div className="post__title"> 제목 {index} </div>
-                <div className="post__text"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). </div>
-                <div className="post__utils-box">
-                  <div className="post__delete"> 삭제 </div>
-                  <div className="post__edit"> 수정 </div>
-                </div>
+                <div className="post__title">{post?.title}</div>
+                <div className="post__text">{post?.summary}</div>
               </Link>
+
+              {post?.email === user?.email && (
+                <div className="post__utils-box">
+                  <div
+                    className="post__delete"
+                    role="presentation"
+                    onClick={() => handleDelete(post?.id as string)}
+                  >
+                    {" "}
+                    삭제{" "}
+                  </div>
+                  <Link to={`/posts/edit/${post?.id}`} className="post__edit">
+                    수정
+                  </Link>
+                </div>
+              )}
             </div>
-          )
-        })}
+          ))
+        ) : (
+          <div className="post__empty">게시글이 없습니다.</div>
+        )}
       </div>
     </>
+  );
+};
 
-  )
-}
-
-export default PostList
+export default PostList;

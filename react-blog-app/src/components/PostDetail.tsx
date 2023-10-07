@@ -1,35 +1,82 @@
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { PostProps } from "./PostList";
+import { db } from "@/firebase";
+import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import Loader from "./Loader";
+import { toast } from "react-toastify";
 
 const PostDetail = () => {
+  const [post, setPost] = useState<PostProps | null>(null);
+
+  const params = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const getPost = async (id: string) => {
+    if (id) {
+      const docRef = doc(db, "posts", id);
+      const docSnap = await getDoc(docRef);
+
+      setPost({
+        id: docSnap.id,
+        ...(docSnap.data() as PostProps),
+      });
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirm = window.confirm("정말 삭제하시겠습니까?");
+    if (confirm && post && post.id) {
+      await deleteDoc(doc(db, "posts", post.id));
+
+      toast.success("삭제되었습니다.");
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    if (params?.id) {
+      getPost(params?.id);
+    }
+  }, [params?.id]);
+
   return (
     <>
       <div className="post__detail">
-        <div className="post__box">
+        {post ? (
+          <div className="post__box">
+            <div className="post__title">{post?.title}</div>
 
-          <div className="post__title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-          </div>
+            <div className="post__profile-box">
+              <div className="post__profile" />
+              <div className="post__author-name">{post?.email}</div>
+              <div className="post__date">{post?.createdAt}</div>
+            </div>
 
-          <div className="post__profile-box">
-            <div className="post__profile" />
-            <div className="post__author-name">테스트</div>
-            <div className="post__date">2021-10-10</div>
-          </div>
+            <div className="post__utils-box">
+              <div
+                className="post__delete"
+                role="presentaion"
+                onClick={handleDelete}
+              >
+                {" "}
+                삭제{" "}
+              </div>
+              <div className="post__edit">
+                <Link to={`/posts/edit/${post?.id}`}>수정</Link>
+              </div>
+            </div>
 
-          <div className="post__utils-box">
-            <div className="post__delete"> 삭제 </div>
-            <div className="post__edit">
-              <Link to="/post/edit/1">수정</Link>
+            <div className="post__text post__text--pre-wrap">
+              {post?.content}
             </div>
           </div>
-
-          <div className="post__title"> 제목 </div>
-          <div className="post__text"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). </div>
-
-        </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PostDetail
+export default PostDetail;

@@ -152,6 +152,14 @@ footer a:focus {
   color: black;
 }
 
+.post__empty {
+  padding: 24px;
+  text-align: center;
+  color: gray;
+  border: 1px solid #f2f2f2;
+  border-radius: 20px;
+}
+
 /* post detail */
 
 .post__detail .post__title {
@@ -177,6 +185,10 @@ footer a:focus {
 .post__edit a {
   text-decoration: none;
   color: gray;
+}
+
+.post__text--pre-wrap {
+  white-space: pre-wrap;
 }
 
 /* profile */
