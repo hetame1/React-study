@@ -4,13 +4,14 @@ import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { PostProps } from "./PostList";
+import { CATEGORIES, CategoryType, PostProps } from "./PostList";
 
 const PostForm = () => {
   const [title, setTitle] = useState("");
   const [post, setPost] = useState<PostProps | null>(null);
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState<CategoryType | string>("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const params = useParams<{ id: string }>();
@@ -38,11 +39,14 @@ const PostForm = () => {
       setTitle(post.title);
       setSummary(post.summary);
       setContent(post.content);
+      setCategory(post.category);
     }
   }, [post]);
 
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
 
@@ -52,6 +56,8 @@ const PostForm = () => {
       setSummary(value);
     } else if (name === "content") {
       setContent(value);
+    } else if (name === "category") {
+      setCategory(value as CategoryType);
     }
   };
 
@@ -65,7 +71,12 @@ const PostForm = () => {
           title,
           summary,
           content,
-          updatedAt: new Date()?.toLocaleDateString(),
+          updatedAt: new Date()?.toLocaleDateString("ko-KR", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          }),
+          category,
         });
 
         toast.success("게시글이 수정되었습니다.");
@@ -75,9 +86,14 @@ const PostForm = () => {
           title,
           summary,
           content,
-          createdAt: new Date()?.toLocaleDateString(),
+          createdAt: new Date()?.toLocaleDateString("ko-KR", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          }),
           email: user?.email,
           uid: user?.uid,
+          category,
         });
 
         toast.success("게시글이 작성되었습니다.");
@@ -102,6 +118,23 @@ const PostForm = () => {
             value={title}
             onChange={onChange}
           />
+        </div>
+
+        <div className="form__block">
+          <label htmlFor="category">카테고리</label>
+          <select
+            name="category"
+            id="category"
+            onChange={onChange}
+            defaultValue={category}
+          >
+            <option value="">카테고리를 선택해주세요</option>
+            {CATEGORIES.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form__block">
