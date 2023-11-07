@@ -15,8 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "types": ["testing-library__jest-dom"] // 이 부분을 추가하세요
+    "jsx": "react-jsx"
   },
-  "include": ["src", "tsconfig.paths.json"]
+  "include": ["src"]
 }

@@ -38,6 +38,7 @@ const RAW_RUNTIME_STATE =
           ["@types/testing-library__jest-dom", "npm:6.0.0"],\
           ["classnames", "npm:2.3.2"],\
           ["craco-alias", "npm:3.0.1"],\
+          ["date-fns", "npm:2.30.0"],\
           ["eslint", "npm:8.52.0"],\
           ["eslint-config-prettier", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:9.0.0"],\
           ["eslint-config-react-app", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:7.0.1"],\
@@ -48,6 +49,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:18.2.0"],\
           ["react-scripts", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:5.0.1"],\
           ["sass", "npm:1.69.5"],\
+          ["tsconfig-paths-webpack-plugin", "npm:4.1.0"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
         ],\
@@ -7880,6 +7882,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["date-fns", [\
+      ["npm:2.30.0", {\
+        "packageLocation": "../../../../.yarn/berry/cache/date-fns-npm-2.30.0-895c790e0f-10c0.zip/node_modules/date-fns/",\
+        "packageDependencies": [\
+          ["date-fns", "npm:2.30.0"],\
+          ["@babel/runtime", "npm:7.23.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["debug", [\
       ["npm:2.6.9", {\
         "packageLocation": "../../../../.yarn/berry/cache/debug-npm-2.6.9-7d4cb597dc-10c0.zip/node_modules/debug/",\
@@ -15683,6 +15695,7 @@ const RAW_RUNTIME_STATE =
           ["@types/testing-library__jest-dom", "npm:6.0.0"],\
           ["classnames", "npm:2.3.2"],\
           ["craco-alias", "npm:3.0.1"],\
+          ["date-fns", "npm:2.30.0"],\
           ["eslint", "npm:8.52.0"],\
           ["eslint-config-prettier", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:9.0.0"],\
           ["eslint-config-react-app", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:7.0.1"],\
@@ -15693,6 +15706,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:18.2.0"],\
           ["react-scripts", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:5.0.1"],\
           ["sass", "npm:1.69.5"],\
+          ["tsconfig-paths-webpack-plugin", "npm:4.1.0"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
         ],\
@@ -17506,6 +17520,28 @@ const RAW_RUNTIME_STATE =
           ["json5", "npm:1.0.2"],\
           ["minimist", "npm:1.2.8"],\
           ["strip-bom", "npm:3.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.2.0", {\
+        "packageLocation": "../../../../.yarn/berry/cache/tsconfig-paths-npm-4.2.0-ac1edf8677-10c0.zip/node_modules/tsconfig-paths/",\
+        "packageDependencies": [\
+          ["tsconfig-paths", "npm:4.2.0"],\
+          ["json5", "npm:2.2.3"],\
+          ["minimist", "npm:1.2.8"],\
+          ["strip-bom", "npm:3.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tsconfig-paths-webpack-plugin", [\
+      ["npm:4.1.0", {\
+        "packageLocation": "../../../../.yarn/berry/cache/tsconfig-paths-webpack-plugin-npm-4.1.0-5bffe3ebda-10c0.zip/node_modules/tsconfig-paths-webpack-plugin/",\
+        "packageDependencies": [\
+          ["tsconfig-paths-webpack-plugin", "npm:4.1.0"],\
+          ["chalk", "npm:4.1.2"],\
+          ["enhanced-resolve", "npm:5.15.0"],\
+          ["tsconfig-paths", "npm:4.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
