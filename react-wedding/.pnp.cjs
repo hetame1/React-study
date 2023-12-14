@@ -49,6 +49,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:18.2.0"],\
           ["react-scripts", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:5.0.1"],\
           ["sass", "npm:1.69.5"],\
+          ["swiper", "npm:11.0.5"],\
           ["tsconfig-paths-webpack-plugin", "npm:4.1.0"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
@@ -15706,6 +15707,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:18.2.0"],\
           ["react-scripts", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:5.0.1"],\
           ["sass", "npm:1.69.5"],\
+          ["swiper", "npm:11.0.5"],\
           ["tsconfig-paths-webpack-plugin", "npm:4.1.0"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
@@ -17141,6 +17143,15 @@ const RAW_RUNTIME_STATE =
           ["csso", "npm:4.2.0"],\
           ["picocolors", "npm:1.0.0"],\
           ["stable", "npm:0.1.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["swiper", [\
+      ["npm:11.0.5", {\
+        "packageLocation": "../../../../.yarn/berry/cache/swiper-npm-11.0.5-152220df64-10c0.zip/node_modules/swiper/",\
+        "packageDependencies": [\
+          ["swiper", "npm:11.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\
