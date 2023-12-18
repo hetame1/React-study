@@ -46,6 +46,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:7.33.2"],\
           ["prettier", "npm:3.0.3"],\
           ["react", "npm:18.2.0"],\
+          ["react-day-picker", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:8.9.1"],\
           ["react-dom", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:18.2.0"],\
           ["react-scripts", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:5.0.1"],\
           ["sass", "npm:1.69.5"],\
@@ -15487,6 +15488,32 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["react-day-picker", [\
+      ["npm:8.9.1", {\
+        "packageLocation": "../../../../.yarn/berry/cache/react-day-picker-npm-8.9.1-4171837254-10c0.zip/node_modules/react-day-picker/",\
+        "packageDependencies": [\
+          ["react-day-picker", "npm:8.9.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:8.9.1", {\
+        "packageLocation": "./.yarn/__virtual__/react-day-picker-virtual-a846a2dcb3/5/.yarn/berry/cache/react-day-picker-npm-8.9.1-4171837254-10c0.zip/node_modules/react-day-picker/",\
+        "packageDependencies": [\
+          ["react-day-picker", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:8.9.1"],\
+          ["@types/date-fns", null],\
+          ["@types/react", "npm:18.2.34"],\
+          ["date-fns", "npm:2.30.0"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/date-fns",\
+          "@types/react",\
+          "date-fns",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["react-dev-utils", [\
       ["npm:12.0.1", {\
         "packageLocation": "../../../../.yarn/berry/cache/react-dev-utils-npm-12.0.1-83ba06e3ee-10c0.zip/node_modules/react-dev-utils/",\
@@ -15704,6 +15731,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:7.33.2"],\
           ["prettier", "npm:3.0.3"],\
           ["react", "npm:18.2.0"],\
+          ["react-day-picker", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:8.9.1"],\
           ["react-dom", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:18.2.0"],\
           ["react-scripts", "virtual:8faa9c7ca2700aa1193d17388b5ed5d4774b82791037d011ebaf2f53e4ada69c8a559d3d9a12281cc21b93b65736c215dee448916306c19e89fa9c55a558ba4d#npm:5.0.1"],\
           ["sass", "npm:1.69.5"],\
