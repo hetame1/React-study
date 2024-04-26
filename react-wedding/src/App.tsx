@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react'
 
 import styles from './App.module.scss'
 import Calender from './components/sections/Calendar'
+import Contact from './components/sections/Contact'
 import Heading from './components/sections/Heading'
 import ImageGallery from './components/sections/ImageGallery'
 import Intro from './components/sections/Intro'
 import Invitation from './components/sections/Invitation'
+import Map from './components/sections/Map'
 import Video from './components/sections/Video'
 import FullScreenMessage from './components/shared/FullScreenMessage'
 import { Wedding } from './models/wedding'
@@ -74,6 +76,8 @@ function App() {
       <Invitation message={invitation} />
       <ImageGallery images={galleryImages} />
       <Calender date={date} />
+      <Map location={location} />
+      <Contact groom={groom} bride={bride} />
       {JSON.stringify(wedding)}
     </div>
   )
