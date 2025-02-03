@@ -1,26 +1,17 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import Button from './components/shared/Button'
+import Text from './components/shared/Text'
 
 function App() {
-  console.log(process.env)
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Text typography="t1" color="black" bold>
+        테스트
+      </Text>
+
+      <div style={{ height: 10, width: '100%', backgroundColor: 'red' }}></div>
+      <Button color="primary" size="large">
+        버튼
+      </Button>
     </div>
   )
 }
