@@ -1,5 +1,7 @@
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   limit,
   query,
@@ -34,5 +36,14 @@ export async function getCards(pageParam?: QuerySnapshot<Card>) {
   return {
     items,
     lastVisible,
+  }
+}
+
+export async function getCard(id: string) {
+  const cardSnapshot = await getDoc(doc(db, COLLECTIONS.CARD, id))
+
+  return {
+    id,
+    ...(cardSnapshot.data() as Card),
   }
 }
