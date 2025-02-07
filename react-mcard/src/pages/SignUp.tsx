@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { collection, doc, setDoc } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
 
 import Form from '@/components/signup/Form'
 import { FormValues } from '@/models/signup'
@@ -8,23 +9,33 @@ import { auth, db } from '@remote/firebase'
 import { COLLECTIONS } from '@/constants'
 
 function SignUpPage() {
-  const handleSubmit = useCallback(async (formValues: FormValues) => {
-    const { email, password, name } = formValues
+  const navigate = useNavigate()
 
-    const { user } = await createUserWithEmailAndPassword(auth, email, password)
+  const handleSubmit = useCallback(
+    async (formValues: FormValues) => {
+      const { email, password, name } = formValues
 
-    await updateProfile(user, {
-      displayName: name,
-    })
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      )
 
-    const newUser = {
-      uid: user.uid,
-      email: user.email,
-      displayName: name,
-    }
+      await updateProfile(user, {
+        displayName: name,
+      })
 
-    await setDoc(doc(collection(db, COLLECTIONS.USERS), user.uid), newUser)
-  }, [])
+      const newUser = {
+        uid: user.uid,
+        email: user.email,
+        displayName: name,
+      }
+
+      await setDoc(doc(collection(db, COLLECTIONS.USERS), user.uid), newUser)
+      navigate('/home')
+    },
+    [navigate],
+  )
 
   return (
     <div>
