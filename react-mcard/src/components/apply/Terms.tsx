@@ -1,36 +1,38 @@
-import { MouseEvent, useCallback, useState } from 'react'
+import { useCallback, useState, MouseEvent } from 'react'
+import Agreement from '@shared/Agreement'
+import FixedBottomButton from '@shared/FixedBottomButton'
 
-import Agreement from '@components/shared/Agreement'
-import FixedBottomButton from '@components/shared/FixedBottomButton'
 import { 약관목록 } from '@constants/apply'
+import { ApplyValues } from '@models/apply'
 
-function Terms({ onNext }: { onNext: (terms: string[]) => void }) {
-  const [termsAgreement, setTermsAgreement] = useState(() => {
-    return 약관목록.reduce<Record<string, boolean>>((prev, term) => {
-      return {
+function Terms({ onNext }: { onNext: (terms: ApplyValues['terms']) => void }) {
+  const [termsAgreements, setTermsAgreements] = useState(() => {
+    return 약관목록.reduce<Record<string, boolean>>(
+      (prev, term) => ({
         ...prev,
         [term.id]: false,
-      }
-    }, {})
+      }),
+      {},
+    )
   })
 
-  const 모든약관이_동의되었는가 = Object.values(termsAgreement).every(
-    (agreement) => agreement,
-  )
-
   const handleAllAgreement = useCallback(
-    (_: MouseEvent<HTMLDivElement>, checked: boolean) => {
-      setTermsAgreement((prevTerms) => {
+    (_: MouseEvent<HTMLElement>, checked: boolean) => {
+      setTermsAgreements((prevTerms) => {
         return Object.keys(prevTerms).reduce(
-          (prev, termId) => ({
+          (prev, key) => ({
             ...prev,
-            [termId]: checked,
+            [key]: checked,
           }),
-          {} as Record<string, boolean>,
+          {},
         )
       })
     },
     [],
+  )
+
+  const 모든약관이_동의되었는가 = Object.values(termsAgreements).every(
+    (동의여부) => 동의여부,
   )
 
   return (
@@ -40,16 +42,16 @@ function Terms({ onNext }: { onNext: (terms: string[]) => void }) {
           checked={모든약관이_동의되었는가}
           onChange={handleAllAgreement}
         >
-          이용약관 동의
+          약관에 모두 동의
         </Agreement.Title>
         {약관목록.map(({ id, title, link }) => (
           <Agreement.Description
             key={id}
-            checked={termsAgreement[id]}
             link={link}
+            checked={termsAgreements[id]}
             onChange={(_, checked) => {
-              setTermsAgreement((prev) => ({
-                ...prev,
+              setTermsAgreements((prevTerms) => ({
+                ...prevTerms,
                 [id]: checked,
               }))
             }}
@@ -58,12 +60,11 @@ function Terms({ onNext }: { onNext: (terms: string[]) => void }) {
           </Agreement.Description>
         ))}
       </Agreement>
-
       <FixedBottomButton
         label="약관동의"
-        disabled={!모든약관이_동의되었는가}
+        disabled={모든약관이_동의되었는가 === false}
         onClick={() => {
-          onNext(Object.keys(termsAgreement))
+          onNext(Object.keys(termsAgreements))
         }}
       />
     </div>

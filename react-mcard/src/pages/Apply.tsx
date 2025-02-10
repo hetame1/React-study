@@ -1,23 +1,14 @@
 import { useState } from 'react'
-
-import Terms from '@components/apply/Terms'
-import BasicInfo from '@components/apply/BasicInfo'
-import CardInfo from '@components/apply/CardInfo'
+import Apply from '@components/apply'
 
 function ApplyPage() {
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(2)
 
-  const handleTermsChange = (terms: string[]) => {
-    console.log(terms)
+  const handleSubmit = () => {
+    // TODO: 카드신청
   }
 
-  return (
-    <div>
-      {step === 0 && <Terms onNext={handleTermsChange} />}
-      {step === 1 && <BasicInfo />}
-      {step === 2 && <CardInfo />}
-    </div>
-  )
+  return <Apply step={step} onSubmit={handleSubmit} />
 }
 
 export default ApplyPage

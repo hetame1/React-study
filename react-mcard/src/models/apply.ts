@@ -2,8 +2,8 @@ import { User } from './user'
 
 export interface Term {
   id: string
-  title: string
   link?: string
+  title: string
 }
 
 export interface ApplyValues {
@@ -11,4 +11,15 @@ export interface ApplyValues {
   terms: Array<Term['id']>
   appliedAt: Date
   cardId: string
+  salary: string
+  creditScore: string
+  payDate: string
+  isMaster: boolean
+  isHipass: boolean
+  isRf: boolean
+}
+
+export interface Option {
+  label: string
+  value: string | number | undefined
 }
