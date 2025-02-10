@@ -6,6 +6,7 @@ import CardPage from '@pages/Card'
 import SignInPage from '@pages/SignIn'
 import SignUpPage from '@pages/SignUp'
 import ApplyPage from '@pages/Apply'
+import ApplyDonePage from '@pages/ApplyDone'
 
 import ScrollToTop from '@components/shared/ScrollToTop'
 import Navbar from '@components/shared/Navbar'
@@ -27,6 +28,14 @@ function App() {
           element={
             <PrivateRoute>
               <ApplyPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/apply/done"
+          element={
+            <PrivateRoute>
+              <ApplyDonePage />
             </PrivateRoute>
           }
         />
