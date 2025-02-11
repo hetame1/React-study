@@ -1,28 +1,28 @@
-import { useCallback } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { signOut } from 'firebase/auth'
 import { css } from '@emotion/react'
+import { Link, useLocation } from 'react-router-dom'
 
-import Flex from '@components/shared/Flex'
-import Button from '@components/shared/Button'
+import { useCallback } from 'react'
+
 import { colors } from '@styles/colorPalette'
+import Flex from '@shared/Flex'
+import Button from '@shared/Button'
 import useUser from '@hooks/auth/useUser'
-import { auth } from '@remote/firebase'
+import MyImage from '@components/my/MyImage'
 
 function Navbar() {
   const location = useLocation()
   const showSignButton =
-    ['/signin', '/signup'].includes(location.pathname) === false
+    ['/signup', '/signin'].includes(location.pathname) === false
 
   const user = useUser()
 
-  const handleLogout = useCallback(() => {
-    signOut(auth)
-  }, [])
-
   const renderButton = useCallback(() => {
     if (user != null) {
-      return <Button onClick={handleLogout}>로그아웃</Button>
+      return (
+        <Link to="/my">
+          <MyImage size={40} />
+        </Link>
+      )
     }
 
     if (showSignButton) {
@@ -34,11 +34,11 @@ function Navbar() {
     }
 
     return null
-  }, [user, showSignButton, handleLogout])
+  }, [user, showSignButton])
 
   return (
     <Flex justify="space-between" align="center" css={navbarContainerStyles}>
-      <Link to="/home">홈</Link>
+      <Link to="/">홈</Link>
       {renderButton()}
     </Flex>
   )
@@ -48,8 +48,8 @@ const navbarContainerStyles = css`
   padding: 10px 24px;
   position: sticky;
   top: 0;
-  z-index: 10;
   background-color: ${colors.white};
+  z-index: 10;
   border-bottom: 1px solid ${colors.gray};
 `
 
