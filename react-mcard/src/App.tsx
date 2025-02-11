@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import HomePage from '@pages/Home'
@@ -11,6 +12,7 @@ import ApplyDonePage from '@pages/ApplyDone'
 import ScrollToTop from '@components/shared/ScrollToTop'
 import Navbar from '@components/shared/Navbar'
 import PrivateRoute from '@components/auth/PrivateRoute'
+import FullPageLoader from '@components/shared/FullPageLoader'
 
 function App() {
   return (
@@ -27,7 +29,11 @@ function App() {
           path="/apply/:id"
           element={
             <PrivateRoute>
-              <ApplyPage />
+              <Suspense
+                fallback={<FullPageLoader message="카드를 신청중입니다" />}
+              >
+                <ApplyPage />
+              </Suspense>
             </PrivateRoute>
           }
         />
