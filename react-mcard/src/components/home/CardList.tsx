@@ -1,12 +1,12 @@
-import { useCallback } from 'react'
-import flatten from 'lodash.flatten'
 import { useInfiniteQuery } from 'react-query'
+import { getCards } from '@remote/card'
+import flatten from 'lodash.flatten'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useNavigate } from 'react-router-dom'
 
 import ListRow from '@shared/ListRow'
-import { getCards } from '@/remote/card'
 import Badge from '@shared/Badge'
-import { useNavigate } from 'react-router-dom'
+import { useCallback } from 'react'
 
 function CardList() {
   const {
@@ -23,44 +23,56 @@ function CardList() {
       getNextPageParam: (snapshot) => {
         return snapshot.lastVisible
       },
+      suspense: true,
     },
   )
 
   const navigate = useNavigate()
 
   const loadMore = useCallback(() => {
-    if (hasNextPage === false || isFetching) return
+    if (hasNextPage === false || isFetching) {
+      return
+    }
 
     fetchNextPage()
-  }, [hasNextPage, isFetching, fetchNextPage])
+  }, [fetchNextPage, hasNextPage, isFetching])
 
-  if (!data) return null
+  if (data == null) {
+    return null
+  }
 
   const cards = flatten(data?.pages.map(({ items }) => items))
 
   return (
     <div>
       <InfiniteScroll
-        next={loadMore}
-        hasMore={hasNextPage}
-        loader={<></>}
         dataLength={cards.length}
+        hasMore={hasNextPage}
+        loader={<ListRow.Skeleton />}
+        next={loadMore}
         scrollThreshold="100px"
       >
         <ul>
-          {cards.map((card, index) => (
-            <ListRow
-              key={card.id}
-              contents={
-                <ListRow.Texts title={`${index + 1}위`} subtitle={card.name} />
-              }
-              right={
-                card.payback != null ? <Badge label={card.payback} /> : null
-              }
-              withArrow
-              onClick={() => navigate(`/card/${card.id}`)}
-            />
-          ))}
+          {cards.map((card, index) => {
+            return (
+              <ListRow
+                key={card.id}
+                contents={
+                  <ListRow.Texts
+                    title={`${index + 1}위`}
+                    subTitle={card.name}
+                  />
+                }
+                right={
+                  card.payback != null ? <Badge label={card.payback} /> : null
+                }
+                withArrow={true}
+                onClick={() => {
+                  navigate(`/card/${card.id}`)
+                }}
+              />
+            )
+          })}
         </ul>
       </InfiniteScroll>
     </div>
