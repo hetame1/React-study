@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { flatten } from 'lodash'
+import flatten from 'lodash.flatten'
 import { useInfiniteQuery } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
