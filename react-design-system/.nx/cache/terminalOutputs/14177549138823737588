@@ -1,0 +1,19 @@
+node:internal/modules/esm/loader:352
+        throw new ERR_REQUIRE_CYCLE_MODULE(message);
+              ^
+
+Error [ERR_REQUIRE_CYCLE_MODULE]: Cannot require() ES Module /Users/hetame/Develop/React-study/react-design-system/packages/themes/build.js in a cycle.
+[90m    at ModuleLoader.importSyncForRequire (node:internal/modules/esm/loader:352:15)[39m
+[90m    at loadESMFromCJS (node:internal/modules/cjs/loader:1554:24)[39m
+[90m    at Module._compile (node:internal/modules/cjs/loader:1705:5)[39m
+[90m    at Object..js (node:internal/modules/cjs/loader:1888:10)[39m
+[90m    at Module.load (node:internal/modules/cjs/loader:1458:32)[39m
+[90m    at Function.<anonymous> (node:internal/modules/cjs/loader:1275:12)[39m
+    at require$$0.Module._load (/Users/hetame/Develop/React-study/react-design-system/.pnp.cjs:10575:31)
+[90m    at TracingChannel.traceSync (node:diagnostics_channel:322:14)[39m
+[90m    at wrapModuleLoad (node:internal/modules/cjs/loader:234:24)[39m
+[90m    at cjsLoader (node:internal/modules/esm/translators:311:5)[39m {
+  code: [32m'ERR_REQUIRE_CYCLE_MODULE'[39m
+}
+
+Node.js v23.7.0

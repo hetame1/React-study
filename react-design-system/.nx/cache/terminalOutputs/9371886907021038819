@@ -1,0 +1,23 @@
+/Users/hetame/Develop/React-study/react-design-system/.pnp.cjs:10684
+      Error.captureStackTrace(firstError);
+            ^
+
+Error: Your application tried to access esbuild, but it isn't declared in your dependencies; this makes the require call ambiguous and unsound.
+
+Required package: esbuild
+Required by: /Users/hetame/Develop/React-study/react-design-system/packages/themes/
+
+Require stack:
+- /Users/hetame/Develop/React-study/react-design-system/packages/themes/build.js
+    at require$$0.Module._resolveFilename (/Users/hetame/Develop/React-study/react-design-system/.pnp.cjs:10684:13)
+[90m    at defaultResolveImpl (node:internal/modules/cjs/loader:1050:19)[39m
+[90m    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1055:22)[39m
+[90m    at Function.<anonymous> (node:internal/modules/cjs/loader:1204:37)[39m
+    at require$$0.Module._load (/Users/hetame/Develop/React-study/react-design-system/.pnp.cjs:10575:31)
+[90m    at TracingChannel.traceSync (node:diagnostics_channel:322:14)[39m
+[90m    at wrapModuleLoad (node:internal/modules/cjs/loader:234:24)[39m
+[90m    at Module.require (node:internal/modules/cjs/loader:1480:12)[39m
+[90m    at require (node:internal/modules/helpers:135:16)[39m
+    at Object.<anonymous> [90m(/Users/hetame/Develop/React-study/react-design-system/packages/themes/[39mbuild.js:1:17[90m)[39m
+
+Node.js v23.7.0

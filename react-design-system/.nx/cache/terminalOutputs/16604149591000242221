@@ -1,0 +1,15 @@
+
+node:internal/modules/run_main:104
+    triggerUncaughtException(
+    ^
+TypeError [Error]: [ERR_IMPORT_ATTRIBUTE_MISSING]: Module "file:///Users/hetame/Develop/React-study/react-design-system/packages/themes/package.json" needs an import attribute of "type: json"
+    at load$1 (file:///Users/hetame/Develop/React-study/react-design-system/.pnp.loader.mjs:1529:21)
+[90m    at nextLoad (node:internal/modules/esm/hooks:748:28)[39m
+[90m    at Hooks.load (node:internal/modules/esm/hooks:385:26)[39m
+[90m    at handleMessage (node:internal/modules/esm/worker:199:24)[39m
+[90m    at Immediate.checkForMessages (node:internal/modules/esm/worker:141:28)[39m
+[90m    at process.processImmediate (node:internal/timers:511:21)[39m {
+  code: [32m'ERR_IMPORT_ATTRIBUTE_MISSING'[39m
+}
+
+Node.js v23.7.0
